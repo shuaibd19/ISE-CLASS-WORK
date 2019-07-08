@@ -8,7 +8,8 @@ enum Hadokentype
 {
 	AIR_HADOKEN,
 	FIRE_HADOKEN,
-	METSU_HADOKEN
+	METSU_HADOKEN,
+	SPECIAL
 };
 
 void throwHadoken(Hadokentype type = AIR_HADOKEN)
@@ -24,6 +25,8 @@ void throwHadoken(Hadokentype type = AIR_HADOKEN)
 	case METSU_HADOKEN:
 		cout << "\tMETSU HADOKEN!! " << termcolor::magenta << termcolor::on_cyan << "~~~~DD}}}\n\n" << termcolor::reset;
 		break;
+	case SPECIAL:
+		cout << "\tSHOURYUKEN!!!!! " << termcolor::grey << termcolor::on_white << "AAAAAAAHHHHHHHH\n\n" << termcolor::reset;
 		return;
 	}
 }
@@ -40,6 +43,7 @@ int main()
 	bool aIsHeld = false;
 	bool fIsHeld = false;
 	bool mIsHeld = false;
+	bool sIsHeld = false;
 
 	while (!userHasQuit)
 	{
@@ -78,6 +82,18 @@ int main()
 		}
 		else {
 			if (mIsHeld) mIsHeld = false;
+		}
+
+		if (GetKeyState('S') & 0x8000)
+		{
+			if (!sIsHeld)
+			{
+				sIsHeld = true;
+				throwHadoken(SPECIAL);
+			}
+		}
+		else {
+			if (sIsHeld) sIsHeld = false;
 		}
 
 		if (GetKeyState('Q') & 0x8000)
